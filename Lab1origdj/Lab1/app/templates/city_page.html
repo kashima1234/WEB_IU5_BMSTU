@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <main class="container city-page">
+
+        <div class="row">
+            <div class="col-6">
+                <img src="{{ city.image }}" class="city-image" alt=""/>
+            </div>
+            <div class="col-6 d-flex flex-md-column gap-md-3">
+
+                <h1>{{ city.name }}</h1>
+
+                <span>Описание: {{ city.description }}</span>
+
+                <span>Площадь: {{ city.square }} km²</span>
+
+                <!-- <a href="/" class="btn btn-primary my-4 w-25">
+                    Домой
+                </a> -->
+
+            </div>
+        </div>
+
+    </main>
+{% endblock content %}
