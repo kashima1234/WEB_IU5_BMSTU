@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <main class="container">
+
+        <div class="row d-flex justify-content-between">
+
+            <div class="col md-8">
+                <form class="search-bar" action="/" method="GET">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" placeholder="Введите название места" name="place_name" value="{{ place_name }}">
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="search-btn btn btn-primary w-100">Поиск</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+             {% include "bin.html" %}
+
+        </div>
+
+        <div class="cards-wrapper">
+
+            {% for place in places %}
+
+                {% include "place_card.html" %}
+
+            {% endfor %}
+
+        </div>
+
+    </main>
+{% endblock content %}
+
