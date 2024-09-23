@@ -1,0 +1,21 @@
+{% load static %}
+
+{% if places_count > 0 %}
+    <div class="col md-4 justify-end">
+        <a href="/expeditions/{{ draft_expedition.id }}/" class="w-25">
+            <button type="submit" class="bin btn btn-primary position-relative w-100">
+                Корзина
+                <div class="badge position-absolute badge bg-primary rounded-pill">
+                    {{ places_count }}
+                </div>
+            </button>
+        </a>
+    </div>
+{% else %}
+    <div class="col md-4 justify-end">
+        <button type="submit" class="bin btn btn-secondary disabled w-25">
+            Корзина
+        </button>
+    </div>
+{% endif %}
+
