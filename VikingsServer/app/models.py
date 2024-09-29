@@ -3,8 +3,6 @@ from django.utils import timezone
 
 from django.contrib.auth.models import User
 
-from app.utils import STATUS_CHOICES
-
 
 class Place(models.Model):
     STATUS_CHOICES = (
@@ -23,12 +21,20 @@ class Place(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = "Продукт"
+        verbose_name = "Место"
         verbose_name_plural = "Места"
         db_table = "places"
 
 
 class Expedition(models.Model):
+    STATUS_CHOICES = (
+        (1, 'Введён'),
+        (2, 'В работе'),
+        (3, 'Завершен'),
+        (4, 'Отклонен'),
+        (5, 'Удален')
+    )
+
     status = models.IntegerField(choices=STATUS_CHOICES, default=1, verbose_name="Статус")
     date_created = models.DateTimeField(default=timezone.now(), verbose_name="Дата создания")
     date_formation = models.DateTimeField(verbose_name="Дата формирования", blank=True, null=True)
@@ -47,9 +53,6 @@ class Expedition(models.Model):
             setattr(item.place, "value", item.value) or item.place
             for item in PlaceExpedition.objects.filter(expedition=self)
         ]
-
-    def get_status(self):
-        return dict(STATUS_CHOICES).get(self.status)
 
     class Meta:
         verbose_name = "Поход"

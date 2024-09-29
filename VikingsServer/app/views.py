@@ -24,7 +24,7 @@ def index(request):
         context["places_count"] = len(draft_expedition.get_places())
         context["draft_expedition"] = draft_expedition
 
-    return render(request, "home_page.html", context)
+    return render(request, "places_page.html", context)
 
 
 def add_place_to_draft_expedition(request, place_id):
@@ -63,8 +63,7 @@ def delete_expedition(request, expedition_id):
         return redirect("/")
 
     with connection.cursor() as cursor:
-        cursor.execute("DELETE FROM place_expedition WHERE expedition_id = %s", [expedition_id])
-        cursor.execute("DELETE FROM expeditions WHERE id = %s", [expedition_id])
+        cursor.execute("UPDATE expeditions SET status=5 WHERE id = %s", [expedition_id])
 
     return redirect("/")
 

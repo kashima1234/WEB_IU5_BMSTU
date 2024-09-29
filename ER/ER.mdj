@@ -477,7 +477,7 @@
 											"font": "Arial;13;1",
 											"left": 392,
 											"top": 221,
-											"width": 249,
+											"width": 257.95068359375,
 											"height": 13,
 											"text": "Походы"
 										},
@@ -503,7 +503,7 @@
 													"font": "Arial;13;0",
 													"left": 397,
 													"top": 244,
-													"width": 239,
+													"width": 247.95068359375,
 													"height": 13
 												},
 												{
@@ -518,7 +518,7 @@
 													"font": "Arial;13;0",
 													"left": 397,
 													"top": 259,
-													"width": 239,
+													"width": 247.95068359375,
 													"height": 13
 												},
 												{
@@ -533,7 +533,7 @@
 													"font": "Arial;13;0",
 													"left": 397,
 													"top": 274,
-													"width": 239,
+													"width": 247.95068359375,
 													"height": 13
 												},
 												{
@@ -548,7 +548,7 @@
 													"font": "Arial;13;0",
 													"left": 397,
 													"top": 289,
-													"width": 239,
+													"width": 247.95068359375,
 													"height": 13
 												},
 												{
@@ -563,7 +563,7 @@
 													"font": "Arial;13;0",
 													"left": 397,
 													"top": 304,
-													"width": 239,
+													"width": 247.95068359375,
 													"height": 13
 												},
 												{
@@ -578,7 +578,7 @@
 													"font": "Arial;13;0",
 													"left": 397,
 													"top": 319,
-													"width": 239,
+													"width": 247.95068359375,
 													"height": 13
 												},
 												{
@@ -593,7 +593,7 @@
 													"font": "Arial;13;0",
 													"left": 397,
 													"top": 334,
-													"width": 239,
+													"width": 247.95068359375,
 													"height": 13
 												},
 												{
@@ -784,21 +784,21 @@
 													"font": "Arial;13;0",
 													"left": 397,
 													"top": 349,
-													"width": 239,
+													"width": 247.95068359375,
 													"height": 13
 												}
 											],
 											"font": "Arial;13;0",
 											"left": 392,
 											"top": 239,
-											"width": 249,
+											"width": 257.95068359375,
 											"height": 128
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 392,
 									"top": 216,
-									"width": 249,
+									"width": 257.95068359375,
 									"height": 152,
 									"nameLabel": {
 										"$ref": "AAAAAAGMv42E9xIjnbY="
@@ -858,6 +858,21 @@
 												},
 												{
 													"_type": "ERDColumnView",
+													"_id": "AAAAAAGSPZxOK0WvnsY=",
+													"_parent": {
+														"$ref": "AAAAAAGMv42E+BI59rU="
+													},
+													"model": {
+														"$ref": "AAAAAAGSPZxOJUWs3FI="
+													},
+													"font": "Arial;13;0",
+													"left": 405,
+													"top": 502,
+													"width": 205.5419921875,
+													"height": 13
+												},
+												{
+													"_type": "ERDColumnView",
 													"_id": "AAAAAAGMv42E+BI3ASA=",
 													"_parent": {
 														"$ref": "AAAAAAGMv42E+BI59rU="
@@ -867,7 +882,7 @@
 													},
 													"font": "Arial;13;0",
 													"left": 405,
-													"top": 502,
+													"top": 517,
 													"width": 205.5419921875,
 													"height": 13
 												},
@@ -882,7 +897,7 @@
 													},
 													"font": "Arial;13;0",
 													"left": 405,
-													"top": 517,
+													"top": 532,
 													"width": 205.5419921875,
 													"height": 13
 												},
@@ -897,7 +912,7 @@
 													},
 													"font": "Arial;13;0",
 													"left": 405,
-													"top": 532,
+													"top": 547,
 													"width": 205.5419921875,
 													"height": 13
 												}
@@ -906,7 +921,7 @@
 											"left": 400,
 											"top": 495,
 											"width": 215.5419921875,
-											"height": 55
+											"height": 70
 										}
 									],
 									"font": "Arial;13;0",
@@ -1515,8 +1530,7 @@
 									},
 									"name": "Фото",
 									"type": "char",
-									"length": "100",
-									"nullable": true
+									"length": "100"
 								},
 								{
 									"_type": "ERDColumn",
@@ -1526,8 +1540,7 @@
 									},
 									"name": "Название",
 									"type": "char",
-									"length": "100",
-									"nullable": true
+									"length": "100"
 								},
 								{
 									"_type": "ERDColumn",
@@ -1537,8 +1550,7 @@
 									},
 									"name": "Описание",
 									"type": "char",
-									"length": "500",
-									"nullable": true
+									"length": "500"
 								},
 								{
 									"_type": "ERDColumn",
@@ -1649,8 +1661,7 @@
 									},
 									"name": "Площадь",
 									"type": "int",
-									"length": 0,
-									"nullable": true
+									"length": 0
 								},
 								{
 									"_type": "ERDColumn",
@@ -1949,7 +1960,7 @@
 										"$ref": "AAAAAAGMv42E+RKBdAM="
 									},
 									"name": "Возглавлял",
-									"type": "char",
+									"type": "char(100)",
 									"nullable": true
 								}
 							]
@@ -1975,6 +1986,16 @@
 								},
 								{
 									"_type": "ERDColumn",
+									"_id": "AAAAAAGSPZxOJUWs3FI=",
+									"_parent": {
+										"$ref": "AAAAAAGMv42E+RKFxcU="
+									},
+									"name": "Id",
+									"type": "int",
+									"primaryKey": true
+								},
+								{
+									"_type": "ERDColumn",
 									"_id": "AAAAAAGMv42E+RKDebk=",
 									"_parent": {
 										"$ref": "AAAAAAGMv42E+RKFxcU="
@@ -1982,8 +2003,8 @@
 									"name": "Id похода",
 									"type": "int",
 									"length": 0,
-									"primaryKey": true,
-									"foreignKey": true
+									"foreignKey": true,
+									"unique": true
 								},
 								{
 									"_type": "ERDColumn",
@@ -1994,8 +2015,8 @@
 									"name": "Id места",
 									"type": "int",
 									"length": 0,
-									"primaryKey": true,
-									"foreignKey": true
+									"foreignKey": true,
+									"unique": true
 								},
 								{
 									"_type": "ERDColumn",

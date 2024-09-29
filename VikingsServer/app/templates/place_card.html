@@ -18,8 +18,8 @@
                             <input placeholder="Введите порядок" disabled type="text" class="form-control" style="width: 250px">
                         {% endif %}
                     </div>
-                    <a href="/places/{{ place.id }}/" class="btn btn-primary" style="width: 100px">
-                        Открыть
+                    <a href="/places/{{ place.id }}/" class="btn btn-primary" style="width: 150px">
+                        Подробнее
                     </a>
                 </div>
             </div>
@@ -36,7 +36,7 @@
             <div class="row card-btns">
                 <div class="col d-flex justify-content-center flex-grow-1">
                     <a href="/places/{{ place.id }}" class="btn btn-primary">
-                        Открыть
+                        Подробнее
                     </a>
                 </div>
                 <form method="post" action="{% url 'add_place_to_draft_expedition' place.id %}" class="col d-flex justify-content-center">
