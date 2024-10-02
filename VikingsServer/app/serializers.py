@@ -4,6 +4,9 @@ from .models import *
 
 
 class PlaceSerializer(serializers.ModelSerializer):
+    def get_image(self, place):
+        return place.image.url.replace("minio", "localhost", 1)
+
     class Meta:
         model = Place
         fields = "__all__"
@@ -14,10 +17,10 @@ class ExpeditionSerializer(serializers.ModelSerializer):
     owner = serializers.SerializerMethodField()
     moderator = serializers.SerializerMethodField()
 
-    def get_owner(selfself, expedition):
+    def get_owner(self, expedition):
         return expedition.owner.username
 
-    def get_moderator(selfself, expedition):
+    def get_moderator(self, expedition):
         if expedition.moderator:
             return expedition.moderator.username
             
@@ -78,3 +81,8 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+
+
+class UserLoginSerializer(serializers.Serializer):
+    username = serializers.CharField(required=True)
+    password = serializers.CharField(required=True)

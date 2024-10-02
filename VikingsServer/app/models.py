@@ -12,7 +12,7 @@ class Place(models.Model):
 
     name = models.CharField(max_length=100, verbose_name="Название")
     status = models.IntegerField(choices=STATUS_CHOICES, default=1, verbose_name="Статус")
-    image = models.ImageField(default="images/default.png")
+    image = models.ImageField(default="default.png")
     description = models.TextField(verbose_name="Описание", blank=True)
 
     square = models.FloatField(blank=True, null=True)

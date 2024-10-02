@@ -1,13 +1,13 @@
 {
 	"info": {
-		"_postman_id": "24ec102b-1942-4b95-b257-e50aed6c8a4c",
+		"_postman_id": "7a1d5a99-fae2-43b6-ab48-1c2e610b385a",
 		"name": "Lab3",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "33669280"
 	},
 	"item": [
 		{
-			"name": "Экспедиции",
+			"name": "Города",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -28,7 +28,7 @@
 			"response": []
 		},
 		{
-			"name": "Место",
+			"name": "Город",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -50,7 +50,7 @@
 			"response": []
 		},
 		{
-			"name": "Обновление места",
+			"name": "Обновление города",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -64,7 +64,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/places/20/update/",
+					"raw": "http://localhost:8000/api/places/2/update/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -73,7 +73,7 @@
 					"path": [
 						"api",
 						"places",
-						"20",
+						"2",
 						"update",
 						""
 					]
@@ -82,7 +82,7 @@
 			"response": []
 		},
 		{
-			"name": "Создание места",
+			"name": "Создание города",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -104,12 +104,12 @@
 			"response": []
 		},
 		{
-			"name": "Удаление места",
+			"name": "Удаление продакта",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/api/places/20/delete/",
+					"raw": "http://localhost:8000/api/places/6/delete/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -118,7 +118,7 @@
 					"path": [
 						"api",
 						"places",
-						"20",
+						"6",
 						"delete",
 						""
 					]
@@ -127,12 +127,12 @@
 			"response": []
 		},
 		{
-			"name": "Добавление места в экспедиции",
+			"name": "Добавление города в поход",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/api/places/37/add_to_expedition/",
+					"raw": "http://localhost:8000/api/places/6/add_to_expedition/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -141,7 +141,7 @@
 					"path": [
 						"api",
 						"places",
-						"37",
+						"6",
 						"add_to_expedition",
 						""
 					]
@@ -150,7 +150,7 @@
 			"response": []
 		},
 		{
-			"name": "Фото места",
+			"name": "Фото города",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -173,9 +173,9 @@
 			"response": []
 		},
 		{
-			"name": "Обновление фото места",
+			"name": "Обновление фото города",
 			"request": {
-				"method": "PUT",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "formdata",
@@ -183,12 +183,12 @@
 						{
 							"key": "image",
 							"type": "file",
-							"src": "/C:/Users/jmiha/YandexDisk/Вуз/РИП/Заказы/Афанасьев/Картинки/places/2.png"
+							"src": "/C:/Users/Ярослав/Desktop/sports-car-futuristic-mountain-sunset-scenery-digital-art-2k-wallpaper-uhdpaper.com-537@0@i.jpg"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/places/21/update_image/",
+					"raw": "http://localhost:8000/api/places/1/update_image/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -197,7 +197,7 @@
 					"path": [
 						"api",
 						"places",
-						"21",
+						"1",
 						"update_image",
 						""
 					]
@@ -206,7 +206,7 @@
 			"response": []
 		},
 		{
-			"name": "Заявки",
+			"name": "Походы",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -242,12 +242,12 @@
 			"response": []
 		},
 		{
-			"name": "Экспедиция",
+			"name": "Поход",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/api/expeditions/67/",
+					"raw": "http://localhost:8000/api/expeditions/31/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -256,7 +256,7 @@
 					"path": [
 						"api",
 						"expeditions",
-						"67",
+						"31",
 						""
 					]
 				}
@@ -264,7 +264,7 @@
 			"response": []
 		},
 		{
-			"name": "Обновление экспедиции",
+			"name": "Обновление похода",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -278,7 +278,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/expeditions/43/update/",
+					"raw": "http://localhost:8000/api/expeditions/31/update/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -287,7 +287,7 @@
 					"path": [
 						"api",
 						"expeditions",
-						"43",
+						"31",
 						"update",
 						""
 					]
@@ -310,7 +310,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/expeditions/93/update_place/45/",
+					"raw": "http://localhost:8000/api/expeditions/31/update_place/6/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -319,9 +319,9 @@
 					"path": [
 						"api",
 						"expeditions",
-						"93",
+						"31",
 						"update_place",
-						"45",
+						"6",
 						""
 					]
 				}
@@ -329,12 +329,12 @@
 			"response": []
 		},
 		{
-			"name": "Формирование экспедиции",
+			"name": "Формирование похода",
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/api/expeditions/67/update_status_user/",
+					"raw": "http://localhost:8000/api/expeditions/31/update_status_user/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -343,7 +343,7 @@
 					"path": [
 						"api",
 						"expeditions",
-						"67",
+						"31",
 						"update_status_user",
 						""
 					]
@@ -352,7 +352,7 @@
 			"response": []
 		},
 		{
-			"name": "Завершение/Отклонение экспедиции",
+			"name": "Завершение/Отклонение похода",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -384,12 +384,12 @@
 			"response": []
 		},
 		{
-			"name": "Удаление экспедиции",
+			"name": "Удаление похода",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/api/expeditions/43/delete/",
+					"raw": "http://localhost:8000/api/expeditions/31/delete/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -398,7 +398,7 @@
 					"path": [
 						"api",
 						"expeditions",
-						"43",
+						"31",
 						"delete",
 						""
 					]
@@ -407,12 +407,12 @@
 			"response": []
 		},
 		{
-			"name": "Удаление места из экспедиции",
+			"name": "Удаление города из похода",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/api/expeditions/30/delete_place/2/",
+					"raw": "http://localhost:8000/api/expeditions/9/delete_place/2/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -421,7 +421,7 @@
 					"path": [
 						"api",
 						"expeditions",
-						"30",
+						"9",
 						"delete_place",
 						"2",
 						""
@@ -462,6 +462,37 @@
 			"response": []
 		},
 		{
+			"name": "Аутентификация",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"user1\",\r\n    \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/users/login/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Обновление пользователя",
 			"request": {
 				"method": "PUT",
@@ -476,7 +507,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/users/22/update/",
+					"raw": "http://localhost:8000/api/users/2/update/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -485,8 +516,30 @@
 					"path": [
 						"api",
 						"users",
-						"22",
+						"2",
 						"update",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Деавторизация",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/users/logout/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users",
+						"logout",
 						""
 					]
 				}

@@ -23,42 +23,42 @@ def add_places():
         name="Ставангер (Норвегия)",
         description="Ставангер был важным торговым и кораблестроительным центром на юго-западном побережье Норвегии. Город играл ключевую роль в викингских мореплаваниях и торговле.",
         square=71,
-        image="images/1.png"
+        image="1.png"
     )
 
     Place.objects.create(
         name="Альта (Норвегия)",
         description="Альта, расположенная в северной части Норвегии, известна своими наскальными рисунками и служила базой для экспедиций в Арктические регионы.",
         square=500,
-        image="images/2.png"
+        image="2.png"
     )
 
     Place.objects.create(
         name="Бирка (Швеция)",
         description="Бирка был важным торговым центром викингов, расположенным на острове в озере Меларен. Город играл ключевую роль в торговых путях викингов.",
         square=300,
-        image="images/3.png"
+        image="3.png"
     )
 
     Place.objects.create(
         name="Гардарики (Россия)",
         description="Гардарики, расположенный на территории современной России, был важным торговым центром на пути викингов к Византии и Восточной Европе.",
         square=1200,
-        image="images/4.png"
+        image="4.png"
     )
 
     Place.objects.create(
         name="Лунд (Швеция)",
         description="Лунд был одним из первых викингских городов и важным центром вероисповедания. Город известен своими историческими памятниками и археологическими находками.",
         square=26,
-        image="images/5.png"
+        image="5.png"
     )
 
     Place.objects.create(
         name="Рейкьявик (Исландия)",
         description="Рейкьявик был основан викингами и со временем стал столицей Исландии. Город стал важным центром для викингов и их потомков.",
         square=275,
-        image="images/6.png"
+        image="6.png"
     )
 
     client = Minio("minio:9000", "minio", "minio123", secure=False)
@@ -70,7 +70,7 @@ def add_places():
     client.fput_object('images', '6.png', "app/static/images/6.png")
     client.fput_object('images', 'default.png', "app/static/images/default.png")
 
-    print("Экспедиции добавлены")
+    print("Услуги добавлены")
 
 
 def add_expeditions():

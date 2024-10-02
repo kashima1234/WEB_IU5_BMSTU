@@ -1,4 +1,5 @@
 import requests
+from django.contrib.auth import authenticate
 from django.http import HttpResponse
 from django.utils import timezone
 from django.utils.dateparse import parse_datetime
@@ -134,7 +135,7 @@ def get_place_image(request, place_id):
     return HttpResponse(response, content_type="image/png")
 
 
-@api_view(["PUT"])
+@api_view(["POST"])
 def update_place_image(request, place_id):
     if not Place.objects.filter(pk=place_id).exists():
         return Response(status=status.HTTP_404_NOT_FOUND)
@@ -300,13 +301,32 @@ def register(request):
     serializer = UserRegisterSerializer(data=request.data)
 
     if not serializer.is_valid():
-        return Response(status=status.HTTP_409_CONFLICT)
+        return Response(status=status.HTTP_409_CONFLICT)                        
 
     user = serializer.save()
 
     serializer = UserSerializer(user)
 
     return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(["POST"])
+def login(request):
+    serializer = UserLoginSerializer(data=request.data)
+
+    if not serializer.is_valid():
+        return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
+
+    user = authenticate(**serializer.data)
+    if user is None:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+    return Response(status=status.HTTP_200_OK)
+
+
+@api_view(["POST"])
+def logout(request):
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(["PUT"])
