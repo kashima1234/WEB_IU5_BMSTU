@@ -8,12 +8,12 @@ from .utils import random_date, random_timedelta
 
 
 def add_users():
-    User.objects.create_user("user", "user@user.com", "1234")
-    User.objects.create_superuser("root", "root@root.com", "1234")
+    User.objects.create_user("user", "user@user.com", "1234", first_name="user", last_name="user")
+    User.objects.create_superuser("root", "root@root.com", "1234", first_name="root", last_name="root")
 
     for i in range(1, 10):
-        User.objects.create_user(f"user{i}", f"user{i}@user.com", "1234")
-        User.objects.create_superuser(f"root{i}", f"root{i}@root.com", "1234")
+        User.objects.create_user(f"user{i}", f"user{i}@user.com", "1234", first_name=f"user{i}", last_name=f"user{i}")
+        User.objects.create_superuser(f"root{i}", f"root{i}@root.com", "1234", first_name=f"user{i}", last_name=f"user{i}")
 
     print("Пользователи созданы")
 

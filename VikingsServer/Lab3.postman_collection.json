@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "7a1d5a99-fae2-43b6-ab48-1c2e610b385a",
+		"_postman_id": "437e8d7c-7758-453e-8fc8-2bafd868ce58",
 		"name": "Lab3",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "33669280"
@@ -12,7 +12,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/api/places/search",
+					"raw": "http://localhost:8000/api/places/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -21,7 +21,7 @@
 					"path": [
 						"api",
 						"places",
-						"search"
+						""
 					]
 				}
 			},
@@ -64,7 +64,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/places/2/update/",
+					"raw": "http://localhost:8000/api/places/1/update/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -73,7 +73,7 @@
 					"path": [
 						"api",
 						"places",
-						"2",
+						"1",
 						"update",
 						""
 					]
@@ -109,7 +109,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/api/places/6/delete/",
+					"raw": "http://localhost:8000/api/places/1/delete/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -118,7 +118,7 @@
 					"path": [
 						"api",
 						"places",
-						"6",
+						"1",
 						"delete",
 						""
 					]
@@ -132,30 +132,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/api/places/6/add_to_expedition/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8000",
-					"path": [
-						"api",
-						"places",
-						"6",
-						"add_to_expedition",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Фото города",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8000/api/places/1/image/",
+					"raw": "http://localhost:8000/api/places/1/add_to_expedition/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -165,7 +142,7 @@
 						"api",
 						"places",
 						"1",
-						"image",
+						"add_to_expedition",
 						""
 					]
 				}
@@ -211,7 +188,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/api/expeditions/search/?date_start=2023-11-11&date_end=2024-09-11&status=3",
+					"raw": "http://localhost:8000/api/expeditions/?date_start=2023-11-11&date_end=2025-09-11&status=3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -220,7 +197,6 @@
 					"path": [
 						"api",
 						"expeditions",
-						"search",
 						""
 					],
 					"query": [
@@ -230,7 +206,7 @@
 						},
 						{
 							"key": "date_end",
-							"value": "2024-09-11"
+							"value": "2025-09-11"
 						},
 						{
 							"key": "status",
@@ -310,7 +286,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/expeditions/31/update_place/6/",
+					"raw": "http://localhost:8000/api/expeditions/31/update_place/1/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -321,7 +297,7 @@
 						"expeditions",
 						"31",
 						"update_place",
-						"6",
+						"1",
 						""
 					]
 				}
@@ -412,7 +388,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/api/expeditions/9/delete_place/2/",
+					"raw": "http://localhost:8000/api/expeditions/31/delete_place/1/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -421,9 +397,9 @@
 					"path": [
 						"api",
 						"expeditions",
-						"9",
+						"31",
 						"delete_place",
-						"2",
+						"1",
 						""
 					]
 				}
@@ -507,7 +483,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/users/2/update/",
+					"raw": "http://localhost:8000/api/users/22/update/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -516,7 +492,7 @@
 					"path": [
 						"api",
 						"users",
-						"2",
+						"22",
 						"update",
 						""
 					]

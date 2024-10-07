@@ -48,12 +48,6 @@ class Expedition(models.Model):
     def __str__(self):
         return "Поход №" + str(self.pk)
 
-    def get_places(self):
-        return [
-            setattr(item.place, "value", item.value) or item.place
-            for item in PlaceExpedition.objects.filter(expedition=self)
-        ]
-
     class Meta:
         verbose_name = "Поход"
         verbose_name_plural = "Походы"
@@ -72,4 +66,6 @@ class PlaceExpedition(models.Model):
     class Meta:
         verbose_name = "м-м"
         verbose_name_plural = "м-м"
+        ordering = ('value', )
         db_table = "place_expedition"
+        unique_together = ('place', 'expedition')

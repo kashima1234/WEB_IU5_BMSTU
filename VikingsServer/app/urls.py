@@ -3,17 +3,16 @@ from .views import *
 
 urlpatterns = [
     # Набор методов для услуг
-    path('api/places/search/', search_places),  # GET
+    path('api/places/', search_places),  # GET
     path('api/places/<int:place_id>/', get_place_by_id),  # GET
-    path('api/places/<int:place_id>/image/', get_place_image),  # GET
     path('api/places/<int:place_id>/update/', update_place),  # PUT
-    path('api/places/<int:place_id>/update_image/', update_place_image),  # PUT
+    path('api/places/<int:place_id>/update_image/', update_place_image),  # POST
     path('api/places/<int:place_id>/delete/', delete_place),  # DELETE
     path('api/places/create/', create_place),  # POST
     path('api/places/<int:place_id>/add_to_expedition/', add_place_to_expedition),  # POST
 
     # Набор методов для заявок
-    path('api/expeditions/search/', search_expeditions),  # GET
+    path('api/expeditions/', search_expeditions),  # GET
     path('api/expeditions/<int:expedition_id>/', get_expedition_by_id),  # GET
     path('api/expeditions/<int:expedition_id>/update/', update_expedition),  # PUT
     path('api/expeditions/<int:expedition_id>/update_status_user/', update_status_user),  # PUT
@@ -28,5 +27,5 @@ urlpatterns = [
     path('api/users/register/', register), # POST
     path('api/users/login/', login), # POST
     path('api/users/logout/', logout), # POST
-    path('api/users/<int:user_id>/update/', update_user), # PUT
+    path('api/users/<int:user_id>/update/', update_user) # PUT
 ]

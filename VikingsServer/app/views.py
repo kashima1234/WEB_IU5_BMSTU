@@ -34,6 +34,7 @@ def search_places(request):
 
     resp = {
         "places": serializer.data,
+        "places_count": len(serializer.data),
         "draft_expedition": draft_expedition.pk if draft_expedition else None
     }
 
@@ -119,20 +120,9 @@ def add_place_to_expedition(request, place_id):
     item.place = place
     item.save()
 
-    serializer = ExpeditionSerializer(draft_expedition, many=False)
-
-    return Response(serializer.data["places"])
-
-
-@api_view(["GET"])
-def get_place_image(request, place_id):
-    if not Place.objects.filter(pk=place_id).exists():
-        return Response(status=status.HTTP_404_NOT_FOUND)
-
-    place = Place.objects.get(pk=place_id)
-    response = requests.get(place.image.url.replace("localhost", "minio"))
-
-    return HttpResponse(response, content_type="image/png")
+    items = PlaceExpedition.objects.filter(expedition=draft_expedition)
+    places = [PlaceSerializer(item.place, many=False).data for item in items]
+    return Response(places)
 
 
 @api_view(["POST"])
@@ -301,7 +291,7 @@ def register(request):
     serializer = UserRegisterSerializer(data=request.data)
 
     if not serializer.is_valid():
-        return Response(status=status.HTTP_409_CONFLICT)                        
+        return Response(status=status.HTTP_409_CONFLICT)
 
     user = serializer.save()
 
@@ -321,7 +311,9 @@ def login(request):
     if user is None:
         return Response(status=status.HTTP_401_UNAUTHORIZED)
 
-    return Response(status=status.HTTP_200_OK)
+    serializer = UserSerializer(user)
+
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @api_view(["POST"])

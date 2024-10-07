@@ -26,8 +26,7 @@ class ExpeditionSerializer(serializers.ModelSerializer):
             
     def get_places(self, expedition):
         items = PlaceExpedition.objects.filter(expedition=expedition)
-        serializer = PlaceSerializer([item.place for item in items], many=True)
-        return serializer.data
+        return [{**PlaceSerializer(item.place).data, "value": item.value} for item in items]
 
     class Meta:
         model = Expedition
@@ -59,7 +58,7 @@ class PlaceExpeditionSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'email', 'password', 'first_name', 'last_name', 'date_joined', 'password', 'username')
+        fields = ('id', 'email', 'username', 'first_name', 'last_name')
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):
