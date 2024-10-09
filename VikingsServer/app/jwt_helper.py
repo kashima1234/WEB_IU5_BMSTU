@@ -27,4 +27,7 @@ def get_jwt_payload(token):
 
 
 def get_access_token(request):
+    if request.headers.get("Authorization"):
+        return request.headers.get("Authorization")
+
     return request.COOKIES.get('access_token')

@@ -1,7 +1,5 @@
-import requests
 from django.contrib.auth import authenticate
-from django.http import HttpResponse
-from django.utils.dateparse import parse_datetime, parse_date
+from django.utils.dateparse import parse_datetime
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
@@ -17,10 +15,13 @@ from .utils import identity_user
 def get_draft_expedition(request):
     user = identity_user(request)
 
+    print(user)
+
     if user is None:
         return None
 
-    expedition = Expedition.objects.filter(owner_id=user.id).filter(status=1).first()
+
+    expedition = Expedition.objects.filter(owner=user).filter(status=1).first()
 
     return expedition
 
@@ -47,7 +48,7 @@ def search_places(request):
 
     resp = {
         "places": serializer.data,
-        "places_count": len(serializer.data),
+        "places_count": PlaceExpedition.objects.filter(expedition=draft_expedition).count() if draft_expedition else None,
         "draft_expedition_id": draft_expedition.pk if draft_expedition else None
     }
 
@@ -161,14 +162,13 @@ def update_place_image(request, place_id):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def search_expeditions(request):
-    user = identity_user(request)
-
     status_id = int(request.GET.get("status", 0))
     date_formation_start = request.GET.get("date_formation_start")
     date_formation_end = request.GET.get("date_formation_end")
 
     expeditions = Expedition.objects.exclude(status__in=[1, 5])
 
+    user = identity_user(request)
     if not user.is_staff:
         expeditions = expeditions.filter(owner=user)
 
@@ -204,7 +204,9 @@ def get_expedition_by_id(request, expedition_id):
 @api_view(["PUT"])
 @permission_classes([IsAuthenticated])
 def update_expedition(request, expedition_id):
-    if not Expedition.objects.filter(pk=expedition_id).exists():
+    user = identity_user(request)
+
+    if not Expedition.objects.filter(pk=expedition_id, owner=user).exists():
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     expedition = Expedition.objects.get(pk=expedition_id)
@@ -219,7 +221,9 @@ def update_expedition(request, expedition_id):
 @api_view(["PUT"])
 @permission_classes([IsAuthenticated])
 def update_status_user(request, expedition_id):
-    if not Expedition.objects.filter(pk=expedition_id).exists():
+    user = identity_user(request)
+
+    if not Expedition.objects.filter(pk=expedition_id, owner=user).exists():
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     expedition = Expedition.objects.get(pk=expedition_id)
@@ -262,7 +266,9 @@ def update_status_admin(request, expedition_id):
 @api_view(["DELETE"])
 @permission_classes([IsAuthenticated])
 def delete_expedition(request, expedition_id):
-    if not Expedition.objects.filter(pk=expedition_id).exists():
+    user = identity_user(request)
+
+    if not Expedition.objects.filter(pk=expedition_id, owner=user).exists():
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     expedition = Expedition.objects.get(pk=expedition_id)
@@ -279,6 +285,11 @@ def delete_expedition(request, expedition_id):
 @api_view(["DELETE"])
 @permission_classes([IsAuthenticated])
 def delete_place_from_expedition(request, expedition_id, place_id):
+    user = identity_user(request)
+
+    if not Expedition.objects.filter(pk=expedition_id, owner=user).exists():
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
     if not PlaceExpedition.objects.filter(expedition_id=expedition_id, place_id=place_id).exists():
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -300,6 +311,11 @@ def delete_place_from_expedition(request, expedition_id, place_id):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def get_place_expedition(request, expedition_id, place_id):
+    user = identity_user(request)
+
+    if not Expedition.objects.filter(pk=expedition_id, owner=user).exists():
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
     if not PlaceExpedition.objects.filter(place_id=place_id, expedition_id=expedition_id).exists():
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -314,6 +330,11 @@ def get_place_expedition(request, expedition_id, place_id):
 @api_view(["PUT"])
 @permission_classes([IsAuthenticated])
 def update_place_in_expedition(request, expedition_id, place_id):
+    user = identity_user(request)
+
+    if not Expedition.objects.filter(pk=expedition_id, owner=user).exists():
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
     if not PlaceExpedition.objects.filter(place_id=place_id, expedition_id=expedition_id).exists():
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -369,14 +390,6 @@ def register(request):
     response.set_cookie('access_token', access_token, httponly=True)
 
     return response
-
-
-@api_view(["POST"])
-@permission_classes([IsAuthenticated])
-def check(request):
-    user = identity_user(request)
-    serializer = UserSerializer(user, many=False)
-    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @api_view(["POST"])
