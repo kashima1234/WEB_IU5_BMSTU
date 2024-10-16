@@ -7,7 +7,7 @@
 
 ## Backend:
 
-- [X] [05-lab-01-DimaPermyakov](https://github.com/kashima1234/WEB_IU5_BMSTU/tree/backend/SSR)
-- [X] [05-lab-02-DimaPermyakov](https://github.com/kashima1234/WEB_IU5_BMSTU/tree/backend/Database)
-- [X] [05-lab-03-DimaPermyakov](https://github.com/kashima1234/WEB_IU5_BMSTU/tree/backend/web-service)
-- [X] [05-lab-04-DimaPermyakov](https://github.com/kashima1234/WEB_IU5_BMSTU/tree/backend/auth)
+- [X] [05-lab-01-Ahmedkashima](https://github.com/kashima1234/WEB_IU5_BMSTU/tree/backend/SSR)
+- [X] [05-lab-02-Ahmedkashima](https://github.com/kashima1234/WEB_IU5_BMSTU/tree/backend/Database)
+- [X] [05-lab-03-Ahmedkashima](https://github.com/kashima1234/WEB_IU5_BMSTU/tree/backend/web-service)
+- [X] [05-lab-04-Ahmedkashima](https://github.com/kashima1234/WEB_IU5_BMSTU/tree/backend/auth)
