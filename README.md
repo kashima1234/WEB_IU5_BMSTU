@@ -11,4 +11,4 @@
 - [X] [05-lab-03-Ahmedkashima](https://github.com/kashima1234/WEB_IU5_BMSTU/tree/backend/web-service)
 - [X] [05-lab-04-Ahmedkashima](https://github.com/kashima1234/WEB_IU5_BMSTU/tree/backend/auth)
 
-<img align="right" src="Resources/hey.webp" height="260px"/>  
+<img align="right" src="Resources/hey.webp" height="200px"/>  
