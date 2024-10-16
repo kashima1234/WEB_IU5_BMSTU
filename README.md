@@ -1,4 +1,4 @@
-# BMSTU IU5 Laboratory Works.
+# <span style="color:pink">BMSTU IU5 Laboratory Works.</span>
 
 <div>
 <img src="https://img.shields.io/badge/language-Django-blue.svg" alt="Django Language">
