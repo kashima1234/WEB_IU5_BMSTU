@@ -1,4 +1,4 @@
-#[**BMSTU IU5 Laboratory Works**](https://img.shields.io/badge/BMSTU_IU5_Laboratory_Works-pink?style=flat-square)
+![BMSTU IU5 Laboratory Works](https://img.shields.io/badge/BMSTU_IU5_Laboratory_Works-pink?style=flat-square)
 
 <div>
 <img src="https://img.shields.io/badge/language-Django-blue.svg" alt="Django Language">
