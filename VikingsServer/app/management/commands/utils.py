@@ -14,3 +14,7 @@ def random_timedelta(factor=100):
 
 def random_bool():
     return bool(random.getrandbits(1))
+
+
+def format_date(raw, format="%d.%m.%Y"):
+    return datetime.strptime(raw, format).date()

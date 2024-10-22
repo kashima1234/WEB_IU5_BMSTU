@@ -74,8 +74,8 @@ def add_places():
 
 
 def add_expeditions():
-    users = User.objects.filter(is_superuser=False)
-    moderators = User.objects.filter(is_superuser=True)
+    users = User.objects.filter(is_staff=False)
+    moderators = User.objects.filter(is_staff=True)
 
     if len(users) == 0 or len(moderators) == 0:
         print("Заявки не могут быть добавлены. Сначала добавьте пользователей с помощью команды add_users")
@@ -85,14 +85,16 @@ def add_expeditions():
 
     for _ in range(30):
         status = random.randint(2, 5)
-        add_expedition(status, places, users, moderators)
+        owner = random.choice(users)
+        add_expedition(status, places, owner, moderators)
 
-    add_expedition(1, places, users, moderators)
+    add_expedition(1, places, users[0], moderators)
+    add_expedition(2, places, users[0], moderators)
 
     print("Заявки добавлены")
 
 
-def add_expedition(status, places, users, moderators):
+def add_expedition(status, places, owner, moderators):
     expedition = Expedition.objects.create()
     expedition.status = status
 
@@ -104,7 +106,7 @@ def add_expedition(status, places, users, moderators):
         expedition.date_formation = random_date()
         expedition.date_created = expedition.date_formation - random_timedelta()
 
-    expedition.owner = random.choice(users)
+    expedition.owner = owner
     expedition.moderator = random.choice(moderators)
 
     expedition.viking = "Рагнар Лодброк"

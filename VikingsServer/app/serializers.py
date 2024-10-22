@@ -14,10 +14,19 @@ class PlaceSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class UserSerializer(serializers.ModelSerializer):
+class PlaceItemSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+    value = serializers.SerializerMethodField('get_value')
+
+    def get_image(self, place):
+        return place.image.url.replace("minio", "localhost", 1)
+
+    def get_value(self, place):
+        return self.context.get("value")
+
     class Meta:
-        model = User
-        fields = ('id', 'email', 'username', 'first_name', 'last_name')
+        model = Place
+        fields = ("id", "name", "image", "value")
 
 
 class ExpeditionsSerializer(serializers.ModelSerializer):
@@ -51,7 +60,7 @@ class ExpeditionSerializer(serializers.ModelSerializer):
     
     def get_places(self, expedition):
         items = PlaceExpedition.objects.filter(expedition=expedition)
-        return [{**PlaceSerializer(item.place).data, "value": item.value} for item in items]
+        return [PlaceItemSerializer(item.place, context={"value": item.value}).data for item in items]
     
     class Meta:
         model = Expedition
@@ -62,6 +71,12 @@ class PlaceExpeditionSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlaceExpedition
         fields = "__all__"
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'email', 'username')
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):

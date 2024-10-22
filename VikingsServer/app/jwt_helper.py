@@ -7,7 +7,7 @@ ALGORITHM = settings.JWT["ALGORITHM"]
 ACCESS_TOKEN_LIFETIME = settings.JWT["ACCESS_TOKEN_LIFETIME"]
 
 
-def create_access_token(user_id):
+def create_session(user_id):
     # Create initial payload
     payload = {
         "token_type": "access",
@@ -21,13 +21,15 @@ def create_access_token(user_id):
     return token
 
 
-def get_jwt_payload(token):
+def get_session_payload(token):
     payload = jwt.decode(token, KEY, algorithms=[ALGORITHM])
     return payload
 
 
-def get_access_token(request):
-    if request.headers.get("Authorization"):
-        return request.headers.get("Authorization")
+def get_session(request):
+    cookie = request.headers.get("Cookie")
 
-    return request.COOKIES.get('access_token')
+    if "session" in cookie:
+        return request.COOKIES.get('session')
+
+    return cookie

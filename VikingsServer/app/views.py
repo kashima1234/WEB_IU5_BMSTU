@@ -15,11 +15,8 @@ from .utils import identity_user
 def get_draft_expedition(request):
     user = identity_user(request)
 
-    print(user)
-
     if user is None:
         return None
-
 
     expedition = Expedition.objects.filter(owner=user).filter(status=1).first()
 
@@ -38,11 +35,14 @@ def get_draft_expedition(request):
 )
 @api_view(["GET"])
 def search_places(request):
-    query = request.GET.get("query", "")
+    place_name = request.GET.get("place_name", "")
 
-    place = Place.objects.filter(status=1).filter(name__icontains=query)
+    places = Place.objects.filter(status=1)
 
-    serializer = PlaceSerializer(place, many=True)
+    if place_name:
+        places = places.filter(name__icontains=place_name)
+
+    serializer = PlaceSerializer(places, many=True)
 
     draft_expedition = get_draft_expedition(request)
 
@@ -61,7 +61,7 @@ def get_place_by_id(request, place_id):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     place = Place.objects.get(pk=place_id)
-    serializer = PlaceSerializer(place, many=False)
+    serializer = PlaceSerializer(place)
 
     return Response(serializer.data)
 
@@ -195,7 +195,7 @@ def get_expedition_by_id(request, expedition_id):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     expedition = Expedition.objects.get(pk=expedition_id)
-    serializer = ExpeditionSerializer(expedition, many=False)
+    serializer = ExpeditionSerializer(expedition)
 
     return Response(serializer.data)
 
@@ -210,7 +210,7 @@ def update_expedition(request, expedition_id):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     expedition = Expedition.objects.get(pk=expedition_id)
-    serializer = ExpeditionSerializer(expedition, data=request.data, many=False, partial=True)
+    serializer = ExpeditionSerializer(expedition, data=request.data, partial=True)
 
     if serializer.is_valid():
         serializer.save()
@@ -228,11 +228,14 @@ def update_status_user(request, expedition_id):
 
     expedition = Expedition.objects.get(pk=expedition_id)
 
+    if expedition.status != 1:
+        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
     expedition.status = 2
     expedition.date_formation = timezone.now()
     expedition.save()
 
-    serializer = ExpeditionSerializer(expedition, many=False)
+    serializer = ExpeditionSerializer(expedition)
 
     return Response(serializer.data)
 
@@ -258,7 +261,7 @@ def update_status_admin(request, expedition_id):
     expedition.moderator = identity_user(request)
     expedition.save()
 
-    serializer = ExpeditionSerializer(expedition, many=False)
+    serializer = ExpeditionSerializer(expedition)
 
     return Response(serializer.data)
 
@@ -298,7 +301,7 @@ def delete_place_from_expedition(request, expedition_id, place_id):
 
     expedition = Expedition.objects.get(pk=expedition_id)
 
-    serializer = ExpeditionSerializer(expedition, many=False)
+    serializer = ExpeditionSerializer(expedition)
     places = serializer.data["places"]
 
     if len(places) == 0:
@@ -321,7 +324,7 @@ def get_place_expedition(request, expedition_id, place_id):
 
     item = PlaceExpedition.objects.get(place_id=place_id, expedition_id=expedition_id)
 
-    serializer = PlaceExpeditionSerializer(item, many=False)
+    serializer = PlaceExpeditionSerializer(item)
 
     return Response(serializer.data)
 
@@ -340,7 +343,7 @@ def update_place_in_expedition(request, expedition_id, place_id):
 
     item = PlaceExpedition.objects.get(place_id=place_id, expedition_id=expedition_id)
 
-    serializer = PlaceExpeditionSerializer(item, data=request.data, many=False, partial=True)
+    serializer = PlaceExpeditionSerializer(item, data=request.data, partial=True)
 
     if serializer.is_valid():
         serializer.save()
@@ -360,13 +363,17 @@ def login(request):
     if user is None:
         return Response(status=status.HTTP_401_UNAUTHORIZED)
 
-    access_token = create_access_token(user.id)
+    # old_session = get_session(request)
+    # if old_session:
+    #     cache.delete(old_session)
+
+    session = create_session(user.id)
+    cache.set(session, settings.SESSION_LIFETIME)
 
     serializer = UserSerializer(user)
 
     response = Response(serializer.data, status=status.HTTP_201_CREATED)
-
-    response.set_cookie('access_token', access_token, httponly=True)
+    response.set_cookie('session', session, httponly=True)
 
     return response
 
@@ -381,13 +388,13 @@ def register(request):
 
     user = serializer.save()
 
-    access_token = create_access_token(user.id)
+    session = create_session(user.id)
+    cache.set(session, settings.SESSION_LIFETIME)
 
     serializer = UserSerializer(user)
 
     response = Response(serializer.data, status=status.HTTP_201_CREATED)
-
-    response.set_cookie('access_token', access_token, httponly=True)
+    response.set_cookie('session', session, httponly=True)
 
     return response
 
@@ -395,10 +402,9 @@ def register(request):
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def logout(request):
-    access_token = get_access_token(request)
+    session = get_session(request)
 
-    if access_token not in cache:
-        cache.set(access_token, settings.JWT["ACCESS_TOKEN_LIFETIME"])
+    cache.delete(session)
 
     return Response(status=status.HTTP_200_OK)
 
@@ -415,7 +421,7 @@ def update_user(request, user_id):
     if user.pk != user_id:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    serializer = UserSerializer(user, data=request.data, many=False, partial=True)
+    serializer = UserSerializer(user, data=request.data, partial=True)
     if not serializer.is_valid():
         return Response(status=status.HTTP_409_CONFLICT)
 

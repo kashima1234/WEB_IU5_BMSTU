@@ -2,21 +2,18 @@ from django.contrib.auth.models import User
 from django.core.cache import cache
 from rest_framework.permissions import BasePermission
 
-from .jwt_helper import get_jwt_payload, get_access_token
+from .jwt_helper import get_session_payload, get_session
 
 
 class IsAuthenticated(BasePermission):
     def has_permission(self, request, view):
-        token = get_access_token(request)
+        session = get_session(request)
 
-        if token is None:
+        if session is None or session not in cache:
             return False
 
-        if token in cache:
-            return None
-
         try:
-            payload = get_jwt_payload(token)
+            payload = get_session_payload(session)
         except:
             return False
 
@@ -30,16 +27,13 @@ class IsAuthenticated(BasePermission):
 
 class IsModerator(BasePermission):
     def has_permission(self, request, view):
-        token = get_access_token(request)
+        session = get_session(request)
 
-        if token is None:
+        if session is None or session not in cache:
             return False
 
-        if token in cache:
-            return None
-
         try:
-            payload = get_jwt_payload(token)
+            payload = get_session_payload(session)
         except:
             return False
 
