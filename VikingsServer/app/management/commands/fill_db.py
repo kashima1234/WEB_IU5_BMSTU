@@ -1,3 +1,5 @@
+import random
+
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from minio import Minio
@@ -80,10 +82,9 @@ def add_expeditions():
         add_expedition(status, places, owner, moderators)
 
     add_expedition(1, places, users[0], moderators)
-    add_expedition(2, places, users[0], moderators)
-    add_expedition(3, places, users[0], moderators)
-    add_expedition(4, places, users[0], moderators)
-    add_expedition(5, places, users[0], moderators)
+    for _ in range(30):
+        status = random.randint(2, 5)
+        add_expedition(status, places, users[0], moderators)
 
 
 def add_expedition(status, places, owner, moderators):
@@ -100,7 +101,7 @@ def add_expedition(status, places, owner, moderators):
         expedition.date_created = expedition.date_formation - random_timedelta()
 
     if status == 3:
-        expedition.date = random_date()
+        expedition.count = random.randint(10, 100)
 
     expedition.viking = "Рагнар Лодброк"
 

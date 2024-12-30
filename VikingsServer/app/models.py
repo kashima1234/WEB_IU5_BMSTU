@@ -44,7 +44,7 @@ class Expedition(models.Model):
     moderator = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name="Модератор", related_name='moderator', blank=True,  null=True)
 
     viking = models.CharField(blank=True, null=True)
-    date = models.DateField(blank=True, null=True)
+    count = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return "Поход №" + str(self.pk)
@@ -68,7 +68,7 @@ class PlaceExpedition(models.Model):
         verbose_name = "м-м"
         verbose_name_plural = "м-м"
         db_table = "place_expedition"
-        ordering = ('pk', )
+        ordering = ('order', )
         constraints = [
             models.UniqueConstraint(fields=['place', 'expedition'], name="place_expedition_constraint")
         ]

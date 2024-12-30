@@ -306,7 +306,7 @@ def update_status_admin(request, expedition_id):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
     if request_status == 3:
-        expedition.date = random_date()
+        expedition.count = random.randint(10, 100)
 
     expedition.status = request_status
     expedition.date_complete = timezone.now()
@@ -359,7 +359,6 @@ def delete_place_from_expedition(request, expedition_id, place_id):
     return Response(places)
 
 
-@swagger_auto_schema(method='PUT', request_body=PlaceExpeditionSerializer)
 @api_view(["PUT"])
 @permission_classes([IsAuthenticated])
 def update_place_in_expedition(request, expedition_id, place_id):
@@ -373,10 +372,23 @@ def update_place_in_expedition(request, expedition_id, place_id):
 
     item = PlaceExpedition.objects.get(place_id=place_id, expedition_id=expedition_id)
 
-    serializer = PlaceExpeditionSerializer(item, data=request.data, partial=True)
+    serializer = PlaceExpeditionSerializer(item, partial=True)
 
-    if serializer.is_valid():
-        serializer.save()
+    if PlaceExpedition.objects.filter(expedition_id=expedition_id).count() == 1:
+        return Response(serializer.data)
+
+    items = list(PlaceExpedition.objects.filter(expedition_id=expedition_id))
+    index = items.index(item)
+    next_index = items.index(item) + 1
+
+    if next_index == len(items):
+        return Response(serializer.data)
+
+    items[next_index].order = index
+    items[index].order = next_index
+
+    items[index].save()
+    items[next_index].save()
 
     return Response(serializer.data)
 

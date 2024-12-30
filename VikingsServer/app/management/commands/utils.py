@@ -5,7 +5,7 @@ from django.utils import timezone
 
 def random_date():
     now = datetime.now(tz=timezone.utc)
-    return now + timedelta(random.uniform(-1, 0) * 100)
+    return now + timedelta(random.uniform(-1, 0) * 31)
 
 
 def random_timedelta(factor=100):
